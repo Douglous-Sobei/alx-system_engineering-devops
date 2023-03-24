@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# This script will display the string "Best School" 10 times using a while loop, and on the 9th iteration, it will also display "Hi" on a new line.
+count=1
+while [ $count -le 10 ]
+do
+    if [ $count -eq 9 ]; then
+        echo "Best School"
+        echo "Hi"
+    else
+        echo "Best School"
+    fi
+    count=$((count+1))
+done

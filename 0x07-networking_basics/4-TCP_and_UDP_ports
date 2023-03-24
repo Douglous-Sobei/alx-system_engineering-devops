@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# This script displays listening
+# sockets
+
+netstat -lp

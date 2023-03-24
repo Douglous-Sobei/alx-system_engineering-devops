@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# This script will display the string "Best School" 10 times
+count=1
+until [ $count -gt 10 ]
+do
+    echo "Best School"
+    count=$((count+1))
+done
