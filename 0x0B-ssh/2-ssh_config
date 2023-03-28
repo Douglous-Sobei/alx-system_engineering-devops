@@ -1,5 +1,6 @@
-#!/usr/bin/env bash
-# Configure SSH configuration file
-Host 35.196.96.41
-IdentityFile ~/.ssh/school
-PasswordAuthentication no
+#!/bin/bash
+Host myserver
+    HostName 54.144.82.34
+    User ubuntu
+    IdentityFile /school
+    PasswordAuthentication no
