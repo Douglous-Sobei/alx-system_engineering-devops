@@ -1,33 +1,52 @@
 #!/usr/bin/env bash
-#install ngix and have a file that returns the string "Hello World  inside
 
+# This script installs Nginx and sets up a simple "Hello World" web page
+
+# Update package lists and install Nginx
 sudo apt-get update -y && \
 sudo apt-get install -y nginx
+
+# Check if installation was successful
 if [ $? -eq 0 ]
 then
+    # Set up Nginx configuration
     echo -e \
-"http {
-    root /var/www/school;
-    index index.html;
-    server {
-        listen 80;
-        location \ {
+    "http {
+        root /var/www/school;
+        index index.html;
+        server {
+            listen 80;
+            location / {
+                try_files \$uri \$uri/ =404;
+            }
         }
     }
-}
-events {
-}" > /etc/nginx/nginx.conf
-    mkdir -p /var/www/school
-    echo "Hello World!" > \
-	/var/www/school/index.html
-    service nginx start
+    events {
+    }" > /etc/nginx/nginx.conf
+
+    # Set up simple web page
+    sudo mkdir -p /var/www/school
+    echo "Hello World!" > /var/www/school/index.html
+
+    # Start Nginx service
+    sudo service nginx start
     if [ $? -ne 0 ]
     then
-	"Problem starting nginx"
-	exit 1
+        echo "Problem starting Nginx"
+        exit 1
     fi
+
+    # Check if Nginx is accepting traffic
+    status_code=$(curl --write-out '%{http_code}' --silent --output /dev/null http://localhost)
+    if [[ "$status_code" -ne 200 ]] ; then
+        echo "HTTP status code $status_code when querying /"
+        exit 1
+    fi
+
 else
-    echo "Could not install nginx"
+    echo "Could not install Nginx"
     exit 1
 fi
+
 exit 0
+
