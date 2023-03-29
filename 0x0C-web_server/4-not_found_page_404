@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Script to install nginx on server
+
+sudo apt-get update
+sudo apt-get install -y nginx
+echo "Holberton School" >> /var/www/html/index.html
+sed -i '38i\rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
+
+echo "Ceci n'est pas une page" >> /var/www/html/error_404.html
+sed -i '39i\error_page 404 /error_404.html;' /etc/nginx/sites-available/default
+
+service nginx start
