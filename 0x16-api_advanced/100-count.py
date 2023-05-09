@@ -44,4 +44,3 @@ def count_words(subreddit, word_list, word_count={}, after=None):
         [print('{}: {}'.format(k, v)) for k, v in sorted_counts if v != 0]
     else:
         return count_words(subreddit, word_list, word_count,
-                           info.get("data").get("after"))
